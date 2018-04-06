@@ -1,0 +1,40 @@
+<% include ./partials/header.ejs %>
+
+<div class="ui main text container segment">
+    <div class="ui huge header"> <%= blog.title %></div>
+    <div class="ui top attached">
+        <div class="item">
+            <img id="img" class="ui centered rounded image" src="<%= blog.image%>" >
+                <div class="content">
+                    <span><%= blog.date.toDateString() %></span>
+                </div>
+                <div class="description">
+                    <p><%- blog.body %></p>
+                </div>
+
+            <a class="ui green basic button" href="/blogs/<%= blog._id %>/edit">Edit</a>
+            <form id="delete" action="/blogs/<%= blog._id %>?_method=DELETE" method="post">
+                <button class="ui red basic button">Delete</button>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="ui main text container segment">
+<p>
+    <a class="ui green basic button right" href="/blogs/<%= blog._id %>/comments/new">Add New Comment</a>
+</p>
+
+<div class="comments">
+    <% blog.comments.forEach(function (comment) {  %>
+        <strong><%= comment.author %></strong>
+      <p>
+        <%= comment.text %>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Created On: <%= blog.date.toDateString() %>
+    </p>
+    <% }) %>
+</div>
+</div>
+
+<% include ./partials/footer.ejs %>
